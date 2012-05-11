@@ -1,4 +1,8 @@
 (function($, _, Backbone) {
+    Backbone.Tastypie = {
+        defaultLimit: 20
+    };
+
     _.extend(Backbone.Model.prototype, {
         idAttribute: 'resource_uri',
 
@@ -20,14 +24,16 @@
 
     _.extend(Backbone.Collection.prototype, {
         meta: {},
+        filters: {
+            limit: Backbone.Tastypie.defaultLimit,
+            offset: 0
+        },
 
         initialize: function(collections, options) {
             _.bindAll(this, 'fetchNext', 'fetchPrevious');
 
-            this.filters = (options && options.filters) || {
-                limit: 20,
-                offset: 0
-            };
+            if (options && options.filters)
+                _.extend(this.filters, options.filters);
         },
         url: function(models) {
             var url = this.urlRoot;
