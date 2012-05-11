@@ -56,7 +56,8 @@ var User = Backbone.Model.extend({
 });
 
 var Users = Backbone.Collection.extend({
-    urlRoot: '/api/v1/user/'
+    urlRoot: '/api/v1/user/',
+    model: User
 });
 
 asyncTest("parsing tastypie response", 3, function() {
