@@ -6,4 +6,4 @@ before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 script:
-  - "phantomjs test/runner.js"
+  - "phantomjs test/runner.js test/index.html"
