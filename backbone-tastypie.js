@@ -55,6 +55,7 @@
             return response && response.objects;
         },
         fetchNext: function(options) {
+            options = options || {};
             options.add = true;
 
             this.filters.limit = this.meta.limit;
@@ -66,6 +67,7 @@
             return this.fetch.call(this, options);
         },
         fetchPrevious: function(options) {
+            options = options || {};
             options.add = true;
 
             this.filters.limit = this.meta.limit;
