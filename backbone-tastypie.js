@@ -69,12 +69,15 @@
         fetchPrevious: function(options) {
             options = options || {};
             options.add = true;
+            options.at = 0;
 
             this.filters.limit = this.meta.limit;
             this.filters.offset = this.meta.offset - this.meta.limit;
 
-            if (this.filters.offset < 0)
+            if (this.filters.offset < 0){
+                this.filters.limit += this.filters.offset;
                 this.filters.offset = 0;
+            }
 
             return this.fetch.call(this, options);
         },
