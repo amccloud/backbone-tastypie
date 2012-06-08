@@ -126,7 +126,20 @@ asyncTest("limit greater than total", 6, function() {
     });
 });
 
-test("new model url", 1, function() {
+test("new model url", function() {
     var user = new User();
     equal(user.url(), '/api/v1/user/');
+});
+
+test("model meta", function() {
+    var Foo = Backbone.Collection.extend();
+    var Bar = Backbone.Collection.extend();
+
+    foo = new Foo();
+    bar = new Bar();
+
+    foo.meta.offset = 12;
+
+    console.log(foo.meta.offset, bar.meta.offset);
+    notEqual(foo.meta.offset, bar.meta.offset);
 });
