@@ -5,6 +5,10 @@
         <title>Backbone Tastypie Test Suite</title>
         <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.5.0.css" type="text/css">
         <script src="http://code.jquery.com/qunit/qunit-git.js"></script>
+        <script>
+            if (location.hash === '#testem')
+                document.write('<script src="/testem.js"></'+'script>')
+        </script>
         <script src="http://code.jquery.com/jquery.js"></script>
         <script src="http://ibjhb.github.com/mockjaxExample/src/js/lib/jquery.mockjax-1.5.0.js"></script>
         <script src="http://documentcloud.github.com/underscore/underscore.js"></script>
