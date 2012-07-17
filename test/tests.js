@@ -140,6 +140,5 @@ test("model meta", function() {
 
     foo.meta.offset = 12;
 
-    console.log(foo.meta.offset, bar.meta.offset);
     notEqual(foo.meta.offset, bar.meta.offset);
 });

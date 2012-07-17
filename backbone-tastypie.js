@@ -23,15 +23,14 @@
     });
 
     _.extend(Backbone.Collection.prototype, {
-        filters: {
-            limit: Backbone.Tastypie.defaultLimit,
-            offset: 0
-        },
-
         initialize: function(collections, options) {
             _.bindAll(this, 'fetchNext', 'fetchPrevious');
 
             this.meta = {};
+            this.filters = {
+                limit: Backbone.Tastypie.defaultLimit,
+                offset: 0
+            };
 
             if (options && options.filters)
                 _.extend(this.filters, options.filters);
