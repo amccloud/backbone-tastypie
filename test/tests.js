@@ -8,9 +8,22 @@ var test_users = _([
     {id:7, username:"azat", resource_uri:'/api/v1/user/7/'}
 ]);
 
+function mock_create_user(request) {
+    test_users.push({id:8, username:'zolivar', resource_uri:'/api/v1/user/8/'})
+    return {
+        status: 201,
+        headers: {Location: '/api/v1/user/8/'},
+        success: true,
+        responseText: null
+    };    
+}
+
 $.mockjax(function(request){
+    if(request.type == 'POST') 
+        return mock_create_user(request)
+
     var userDetail = request.url.match(/\/api\/v1\/user\/(\d+)\/$/i);
- 
+     
     if (userDetail) {
         var userId = userDetail[1];
 
@@ -142,3 +155,12 @@ test("model meta", function() {
 
     notEqual(foo.meta.offset, bar.meta.offset);
 });
+
+asyncTest("testing model creation", 6, function(){
+  var users = new Users();  
+  users.create({'username': 'zolivar'}, {success: function(user, response){
+    equal(response.username, 'zolivar')
+    equal(response.id, 8)
+    equal(response.resource_uri, '/api/v1/user/7/')
+  }})
+})
