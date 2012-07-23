@@ -87,7 +87,7 @@
             if (this.isNew())
                 return url;
 
-            return this.get('resource_uri');
+            return this.get('resource_uri') || url + this.id + '/';
         },
         _getId: function() {
             if (this.has('id'))
