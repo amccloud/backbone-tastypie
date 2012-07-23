@@ -87,7 +87,7 @@
             if (this.isNew())
                 return url;
 
-            return this.get('resource_uri') || url + this.id + '/';
+            return this.get('resource_uri') || this.id;
         },
         _getId: function() {
             if (this.has('id'))
@@ -101,8 +101,7 @@
           var item = this.get(itemid);
           if (!item) {
             // download character from the server
-            item = new this.model();
-            item.id = itemid;
+            item = new this.model({resource_uri: itemid});
             $.ajaxSetup({async: use_ajax});
             var deferred = item.fetch(options);
             $.ajaxSetup({async: true});
@@ -138,6 +137,9 @@
             }
 
             return url + this._getQueryString();
+        },
+        _getUri: function(id) {
+            return this.urlRoot + id + '/'
         },
         parse: function(response) {
             if (response && response.meta)
