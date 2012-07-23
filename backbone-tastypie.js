@@ -94,6 +94,22 @@
                 return this.get('id');
 
             return _.chain(this.get('resource_uri').split('/')).compact().last().value();
+        },
+        get_or_fetch: function(itemid, options) {
+          options = options || {};
+          var use_ajax = options.use_ajax || true;
+          var item = this.get(itemid);
+          if (!item) {
+            // download character from the server
+            item = new this.model();
+            item.id = itemid;
+            $.ajaxSetup({async: use_ajax});
+            var deferred = item.fetch(options);
+            $.ajaxSetup({async: true});
+          } else if (options.success) {
+            options.success(item)
+          }
+          return (!item && use_ajax) ? deferred : item;
         }
     });
 
@@ -161,6 +177,23 @@
                 return '';
 
             return '?' + $.param(this.filters);
+        },
+        get_or_fetch: function(itemid, options) {
+          options = options || {};
+          var use_ajax = options.use_ajax || true;
+          var item = this.get(itemid);
+          if (!item) {
+            // download character from the server
+            item = new this.model();
+            item.id = itemid;
+            $.ajaxSetup({async: use_ajax});
+            var deferred = item.fetch(options);
+            $.ajaxSetup({async: true});
+            if(options.add) this.add(item);
+          } else if (options.success) {
+            options.success(item)
+          }
+          return (!item && use_ajax) ? deferred : item;
         }
     });
 
