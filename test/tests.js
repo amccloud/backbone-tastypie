@@ -33,6 +33,11 @@ $.mockjax(function(request){
                 return user.id == userDetail[1];
             })
         };
+    } else if (request.url.match(/\/api\/v1\/user\/mymethod\//i)) {
+        return {
+            responseText: request.data,
+            success: true
+        }
     }
 
     var qs = {};
@@ -156,11 +161,22 @@ test("model meta", function() {
     notEqual(foo.meta.offset, bar.meta.offset);
 });
 
-asyncTest("testing model creation", 6, function(){
+asyncTest("testing model creation", 3, function(){
   var users = new Users();  
   users.create({'username': 'zolivar'}, {success: function(user, response){
     equal(response.username, 'zolivar')
     equal(response.id, 8)
-    equal(response.resource_uri, '/api/v1/user/7/')
+    equal(response.resource_uri, '/api/v1/user/8/')
+    start();
   }})
+})
+
+asyncTest('testing custom api calls', 1, function() {
+    var users = new Users()
+    users.api('/mymethod', {
+        data: {d: 123}, 
+        success: function(response, status, xhr){
+            equal(response.d, 123)
+            start()
+    }})
 })

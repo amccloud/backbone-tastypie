@@ -110,6 +110,10 @@
           }
           return (!item && use_ajax) ? deferred : item;
         },
+        api: function(url, options) {
+            var url = this.url() + url
+            options.url = url
+            return $.ajax(options)
         }
     });
 
@@ -138,6 +142,14 @@
             }
 
             return url + this._getQueryString();
+        },
+        api: function(url, options) {
+            var u = this.url()
+            if (u.indexOf('?') != -1) {
+                url = u.substr(0,u.lastIndexOf('/')) + url + u.substr(u.lastIndexOf('/'))
+            }
+            options.url = url
+            return $.ajax(options)
         },
         _getUri: function(id) {
             return this.urlRoot + id + '/'
