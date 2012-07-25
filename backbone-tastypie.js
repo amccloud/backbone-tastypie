@@ -113,6 +113,9 @@
         api: function(url, options) {
             var url = this.url() + url
             options.url = url
+            _.defaults(options, {
+                dataType: 'application/json'
+            })
             return $.ajax(options)
         }
     });
@@ -149,6 +152,9 @@
                 url = u.substr(0,u.lastIndexOf('/')) + url + u.substr(u.lastIndexOf('/'))
             }
             options.url = url
+            _.defaults(options, {
+                dataType: 'application/json'
+            })
             return $.ajax(options)
         },
         _getUri: function(id) {
