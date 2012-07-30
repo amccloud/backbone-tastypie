@@ -32,7 +32,7 @@
      */
     Backbone.oldSync = Backbone.sync;
     Backbone.sync = function( method, model, options ) {
-        var headers = '';
+        var headers = {};
 
         if ( Backbone.Tastypie.apiKey && Backbone.Tastypie.apiKey.username.length ) {
             headers = _.extend( {
@@ -111,8 +111,9 @@
           return (!item && use_ajax) ? deferred : item;
         },
         api: function(url, options) {
-            var url = this.url() + url
-            options.url = url
+            options = options || {}
+            var u = this.url()
+            options.url = u.substr(0,u.lastIndexOf('/')) + url + '/'
             _.defaults(options, {
                 dataType: 'application/json'
             })
@@ -147,6 +148,7 @@
             return url + this._getQueryString();
         },
         api: function(url, options) {
+            options = options || {}
             var u = this.url()
             if (u.indexOf('?') != -1) {
                 url = u.substr(0,u.lastIndexOf('/')) + url + u.substr(u.lastIndexOf('/'))
