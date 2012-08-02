@@ -97,7 +97,8 @@
         },
         get_or_fetch: function(itemid, options) {
           options = options || {};
-          var use_ajax = options.use_ajax || true;
+          options = $.extend({use_ajax: true}, options)
+          var use_ajax = options.use_ajax;
           var item = this.get(itemid);
           if (!item) {
             // download character from the server
@@ -203,7 +204,8 @@
         },
         get_or_fetch: function(itemid, options) {
           options = options || {};
-          var use_ajax = options.use_ajax || true;
+          options = $.extend({use_ajax: true}, options)
+          var use_ajax = options.use_ajax;
           var item = this.get(itemid);
           if (!item) {
             // download character from the server
