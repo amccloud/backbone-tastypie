@@ -95,14 +95,18 @@
 
             return _.chain(this.get('resource_uri').split('/')).compact().last().value();
         },
+        _getUri: function(id) {
+            return this.urlRoot + id + '/'
+        },
         get_or_fetch: function(itemid, options) {
           options = options || {};
           options = $.extend({use_ajax: true}, options)
           var use_ajax = options.use_ajax;
-          var item = this.get(itemid);
+          var item = false
+          if (this.collection) item = this.collection.get(itemid);
           if (!item) {
             // download character from the server
-            item = new this.model({resource_uri: itemid});
+            item = new this.constructor({resource_uri: itemid});
             $.ajaxSetup({async: use_ajax});
             var deferred = item.fetch(options);
             $.ajaxSetup({async: true});
