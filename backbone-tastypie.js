@@ -120,7 +120,7 @@
             var u = this.url()
             options.url = u.substr(0,u.lastIndexOf('/')) + url + '/'
             _.defaults(options, {
-                dataType: 'application/json'
+                dataType: 'json'
             })
             return $.ajax(options)
         }
@@ -160,7 +160,7 @@
             }
             options.url = url
             _.defaults(options, {
-                dataType: 'application/json'
+                dataType: 'json'
             })
             return $.ajax(options)
         },
