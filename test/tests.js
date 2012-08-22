@@ -51,11 +51,11 @@ $.mockjax(function(request){
     };
 });
 
-var User = Backbone.Model.extend({
+var User = Backbone.Tastypie.Model.extend({
     urlRoot: '/api/v1/user/'
 });
 
-var Users = Backbone.Collection.extend({
+var Users = Backbone.Tastypie.Collection.extend({
     urlRoot: '/api/v1/user/',
     model: User
 });
@@ -132,8 +132,8 @@ test("new model url", function() {
 });
 
 test("model meta", function() {
-    var Foo = Backbone.Collection.extend();
-    var Bar = Backbone.Collection.extend();
+    var Foo = Backbone.Tastypie.Collection.extend();
+    var Bar = Backbone.Tastypie.Collection.extend();
 
     foo = new Foo();
     bar = new Bar();

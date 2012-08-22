@@ -3,10 +3,7 @@
         defaultLimit: 20
     };
 
-    var Model = Backbone.Model,
-        Collection = Backbone.Collection;
-
-    Backbone.Model = Model.extend({
+    Backbone.Tastypie.Model = Backbone.Model.extend({
         idAttribute: 'resource_uri',
 
         url: function() {
@@ -25,9 +22,9 @@
         }
     });
 
-    Backbone.Collection = Collection.extend({
+    Backbone.Tastypie.Collection = Backbone.Collection.extend({
         constructor: function(models, options) {
-            Collection.prototype.constructor.apply(this, arguments);
+            Backbone.Collection.prototype.constructor.apply(this, arguments);
 
             this.meta = {};
             this.filters = {

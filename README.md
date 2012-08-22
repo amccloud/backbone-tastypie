@@ -3,11 +3,11 @@ Modifications to Backbone's Model an Collection so that they play nice with djan
 
 ## Example ##
 ```javascript
-var User = Backbone.Model.extend({
+var User = Backbone.Tastypie.Model.extend({
     urlRoot: '/api/v1/user/'
 });
 
-var Users = Backbone.Collection.extend({
+var Users = Backbone.Tastypie.Collection.extend({
     urlRoot: '/api/v1/user/',
     model: User
 });
