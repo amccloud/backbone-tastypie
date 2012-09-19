@@ -1,4 +1,4 @@
-# Backbone Tastypie [![Build Status](https://secure.travis-ci.org/amccloud/backbone-tastypie.png)](http://travis-ci.org/amccloud/backbone-tastypie]) #
+# Backbone Tastypie [![Build Status](https://secure.travis-ci.org/boronine/backbone-tastypie.png)](http://travis-ci.org/boronine/backbone-tastypie) #
 Modifications to Backbone's Model an Collection so that they play nice with django-tastypie. Includes a way to easily paginate over a resource list and a way to access the associated meta information.
 
 ## Example ##
