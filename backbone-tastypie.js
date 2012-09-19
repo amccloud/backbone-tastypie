@@ -11,7 +11,7 @@
             if (this.isNew())
                 return url;
 
-            return url + this.get('id');
+            return url + this.get('id') + '/';
         }
 
     });
