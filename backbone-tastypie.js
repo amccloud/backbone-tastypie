@@ -34,7 +34,7 @@
 
             if (models) {
                 var ids = _.map(models, function(model) {
-                    return model._getId();
+                    return model.get('id');
                 });
 
                 url += 'set/' + ids.join(';') + '/';
