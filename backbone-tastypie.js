@@ -4,7 +4,6 @@
     };
 
     Backbone.Tastypie.Model = Backbone.Model.extend({
-        idAttribute: 'resource_uri',
 
         url: function() {
             var url = getValue(this, 'urlRoot') || getValue(this.collection, 'urlRoot') || urlError();
@@ -12,14 +11,9 @@
             if (this.isNew())
                 return url;
 
-            return this.get('resource_uri');
-        },
-        _getId: function() {
-            if (this.has('id'))
-                return this.get('id');
-
-            return _.chain(this.get('resource_uri').split('/')).compact().last().value();
+            return url + this.get('id') + '/';
         }
+
     });
 
     Backbone.Tastypie.Collection = Backbone.Collection.extend({
@@ -40,7 +34,7 @@
 
             if (models) {
                 var ids = _.map(models, function(model) {
-                    return model._getId();
+                    return model.get('id');
                 });
 
                 url += 'set/' + ids.join(';') + '/';
